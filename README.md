@@ -2,7 +2,7 @@
 A todo list using API19
 
 ##Before next Monday (3/9)
-* Download Oracle's JDK 1.6 (you can have others, but this project is using 1.6).  Available from my Google Drive https://drive.google.com/file/d/0B6bfAAlGmI5_RU1ITGN1TEs3T00/view?usp=sharing
+* Download Oracle's JDK 1.6 (you can have others, but this project is using 1.6).  x64 version available from my Google Drive (https://drive.google.com/file/d/0B6bfAAlGmI5_amVRSzh1WDBhcHM/view?usp=sharing) or by registering and downloading from Oracle
 * Download AndroidStudio (and updates)
 * Using Android SDK Manager (available through Tools -> Android in Android Studio)
   * from Tools
