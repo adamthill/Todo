@@ -1,7 +1,7 @@
 package com.example.todo;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,9 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,7 +24,7 @@ public class MainActivity extends ActionBarActivity {
         //new!
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container, new DetailFragment())
                     .commit();
         }
     }
@@ -58,12 +56,10 @@ public class MainActivity extends ActionBarActivity {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public class PlaceholderFragment extends Fragment {
+    public static class DetailFragment extends ListFragment {
 
-        public PlaceholderFragment() {
+        public DetailFragment() {
         }
-
-        List<String> items = Arrays.asList( "a", "b", "c" );
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -76,9 +72,15 @@ public class MainActivity extends ActionBarActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
 
-            ListView listview = (ListView)findViewById(R.id.listview);
-            final DetailItemAdapter adapter = new DetailItemAdapter(getActivity(),
+//            ListView listview = (ListView)container.findViewById(android.R.id.list);
+
+            String[] items = new String[]{ "item1", "item2", "item3" };
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                     android.R.layout.simple_list_item_1, items);
+            setListAdapter(adapter);
+
+//            DetailItemAdapter adapter = new DetailItemAdapter(container.getContext(),
+//                    android.R.layout.simple_list_item_1, items);
 //            listview.setAdapter(adapter);
 
             return rootView;
