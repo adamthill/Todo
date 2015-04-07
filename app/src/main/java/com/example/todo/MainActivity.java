@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -74,9 +75,12 @@ public class MainActivity extends ActionBarActivity {
 
 //            ListView listview = (ListView)container.findViewById(android.R.id.list);
 
-            String[] items = new String[]{ "item1", "item2", "item3" };
+//            String[] items = new String[]{ "item1", "item2", "item3" };
+
+            ArrayList<String> mItems = MockDataProvider.getInstance().getItemNames();
+
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                    android.R.layout.simple_list_item_1, items);
+                    android.R.layout.simple_list_item_checked, mItems);
             setListAdapter(adapter);
 
 //            DetailItemAdapter adapter = new DetailItemAdapter(container.getContext(),
