@@ -11,9 +11,9 @@ public class MockDataProvider {
     ArrayList<ListItem> items = new ArrayList<ListItem>();
 
     private MockDataProvider() {
-        items.add(new ListItem("item1", false));
-        items.add(new ListItem("item2", true));
-        items.add(new ListItem("item3", false));
+        items.add(new ListItem("Iron Man", false));
+        items.add(new ListItem("Thor", true));
+        items.add(new ListItem("Hulk", false));
     }
 
     public static synchronized MockDataProvider getInstance() {
