@@ -8,9 +8,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-/**
- * Created by adam on 5/19/15.
- */
+
 public class ListItemFragment extends ListFragment {
 
     ArrayList<ListItem> mListItems;
