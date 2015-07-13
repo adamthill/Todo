@@ -46,6 +46,7 @@ A todo list using API19
 * ability to rename lists
 * edit items/properties
 * delete items
+* Run Away
 * recurring items
 * calendar
 * daily agenda view
