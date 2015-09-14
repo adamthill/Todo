@@ -5,7 +5,6 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import java.util.ArrayList;
 
 
@@ -20,6 +19,8 @@ public class ListItemFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mListItems = MockDataProvider.getInstance().getItems();
+
+
         ListItemAdapter myAdapter = new ListItemAdapter(getActivity(), R.layout.list_item, mListItems);
         setListAdapter(myAdapter);
     }
@@ -31,4 +32,5 @@ public class ListItemFragment extends ListFragment {
 
         return rootView;
     }
+
 }

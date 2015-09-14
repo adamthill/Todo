@@ -4,6 +4,14 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -40,6 +48,43 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+
+        if (id == R.id.save_list) {
+            //save to disk
+            String FILENAME = "todolist.js";
+            String string = "{title: ‘Marvel Heroes’, items: [{itemText: 'Hulk', isDone: false}]}";
+
+            FileOutputStream fos = null;
+            try {
+                fos = openFileOutput(FILENAME, getApplicationContext().MODE_WORLD_WRITEABLE);
+                fos.write(string.getBytes());
+                fos.close();
+            } catch (FileNotFoundException e ) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                BufferedReader inputReader = new BufferedReader(new InputStreamReader(
+                        openFileInput(FILENAME)));
+                String inputString;
+                StringBuffer stringBuffer = new StringBuffer();
+                while ((inputString = inputReader.readLine()) != null) {
+                    stringBuffer.append(inputString + "\n");
+                }
+                Toast.makeText(getApplicationContext(),
+                        stringBuffer.toString(),
+                        Toast.LENGTH_LONG).show();
+            } catch (IOException e) {
+                e.printStackTrace();
+
+            }
+
+            //TODO return to "list of list" view
+
+            return true;
+        }
+
 
         return super.onOptionsItemSelected(item);
     }
