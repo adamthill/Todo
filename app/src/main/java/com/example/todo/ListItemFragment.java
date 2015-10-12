@@ -12,6 +12,7 @@ public class ListItemFragment extends ListFragment {
 
     ArrayList<ListItem> mListItems;
 
+
     public ListItemFragment() {
     }
 

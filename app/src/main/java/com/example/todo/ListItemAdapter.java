@@ -16,14 +16,19 @@ import java.util.ArrayList;
  */
 public class ListItemAdapter extends ArrayAdapter<ListItem> {
     private ArrayList<ListItem> mListItems;
+    public ArrayList<ListItem> getListItems() {
+        return mListItems;
+    }
+
     private Context mContext;
 
     public ListItemAdapter(Context context, int textViewResourceId, ArrayList<ListItem> listItems) {
         super(context, textViewResourceId, listItems);
         mContext = context;
         mListItems = new ArrayList<ListItem>();
-        mListItems.addAll(listItems);
+        getListItems().addAll(listItems);
     }
+
 
     private class ViewHolder {
         EditText item;
@@ -60,10 +65,11 @@ public class ListItemAdapter extends ArrayAdapter<ListItem> {
             holder = (ViewHolder)convertView.getTag();
         }
 
-        ListItem listItem = mListItems.get(position);
+        ListItem listItem = getListItems().get(position);
         holder.item.setText(listItem.getItemText());
         holder.checked.setChecked(listItem.getIsDone());
 
         return convertView;
     }
+
 }

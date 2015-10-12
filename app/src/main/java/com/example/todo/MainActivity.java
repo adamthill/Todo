@@ -1,6 +1,7 @@
 package com.example.todo;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,9 +13,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 
 public class MainActivity extends ActionBarActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,20 +54,12 @@ public class MainActivity extends ActionBarActivity {
         }
 
         if (id == R.id.save_list) {
-            //save to disk
-            String FILENAME = "todolist.js";
-            String string = "{title: ‘Marvel Heroes’, items: [{itemText: 'Hulk', isDone: false}]}";
+            DataProvider dp = DataProvider.getInstance();
+            ListItemFragment fragment = (ListItemFragment)getSupportFragmentManager().findFragmentById(R.id.container);
+            dp.saveListToFile(fragment.mListItems, getApplicationContext());
 
-            FileOutputStream fos = null;
-            try {
-                fos = openFileOutput(FILENAME, getApplicationContext().MODE_WORLD_WRITEABLE);
-                fos.write(string.getBytes());
-                fos.close();
-            } catch (FileNotFoundException e ) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            //test code until we move this into DataProvider
+            String FILENAME = "todolist.js";
             try {
                 BufferedReader inputReader = new BufferedReader(new InputStreamReader(
                         openFileInput(FILENAME)));
@@ -79,8 +75,6 @@ public class MainActivity extends ActionBarActivity {
                 e.printStackTrace();
 
             }
-
-            //TODO return to "list of list" view
 
             return true;
         }

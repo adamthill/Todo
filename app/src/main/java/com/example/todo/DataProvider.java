@@ -1,8 +1,11 @@
 package com.example.todo;
 
+import android.content.Context;
 import android.widget.Toast;
 
 //import org.json.JSONObject;
+
+import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -16,32 +19,35 @@ import java.util.ArrayList;
  * Created by adam on 8/24/15.
  */
 public class DataProvider {
+    private static DataProvider instance = null;
+    public static synchronized DataProvider getInstance() {
+        if (instance == null) {
+            instance = new DataProvider();
+        }
+        return instance;
+    }
+    private DataProvider() {
+    }
 
-    private ArrayList<List> lists = new ArrayList<List>();
-
-//    private Gson gson = new Gson();
-
+    private Gson gson = new Gson();
 
     //Will read and write the entire JSON list of lists each time
-    public boolean saveListToFile() {
+    public boolean saveListToFile(ArrayList<ListItem> items, Context context) {
         //save to disk
         String FILENAME = "todolist.js";
 
-        String string = "{title: ‘Marvel Heroes’, items: [{itemText: 'Hulk', isDone: false}]}";
+        String gsonData = gson.toJson(items);
 
         FileOutputStream fos = null;
         try {
-//            fos = openFileOutput(FILENAME, getApplicationContext().MODE_WORLD_WRITEABLE);
-            fos.write(string.getBytes());
+            fos = context.openFileOutput(FILENAME, context.MODE_PRIVATE);
+            fos.write(gsonData.getBytes());
             fos.close();
         } catch (FileNotFoundException e ) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
 
         return false;
     }
