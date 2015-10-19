@@ -57,24 +57,7 @@ public class MainActivity extends ActionBarActivity {
             DataProvider dp = DataProvider.getInstance();
             ListItemFragment fragment = (ListItemFragment)getSupportFragmentManager().findFragmentById(R.id.container);
             dp.saveListToFile(fragment.mListItems, getApplicationContext());
-
-            //test code until we move this into DataProvider
-            String FILENAME = "todolist.js";
-            try {
-                BufferedReader inputReader = new BufferedReader(new InputStreamReader(
-                        openFileInput(FILENAME)));
-                String inputString;
-                StringBuffer stringBuffer = new StringBuffer();
-                while ((inputString = inputReader.readLine()) != null) {
-                    stringBuffer.append(inputString + "\n");
-                }
-                Toast.makeText(getApplicationContext(),
-                        stringBuffer.toString(),
-                        Toast.LENGTH_LONG).show();
-            } catch (IOException e) {
-                e.printStackTrace();
-
-            }
+            //dp.readListsFromFile(getApplicationContext());
 
             return true;
         }

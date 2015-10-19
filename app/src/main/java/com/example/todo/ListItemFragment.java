@@ -19,8 +19,8 @@ public class ListItemFragment extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mListItems = MockDataProvider.getInstance().getItems();
-
+        DataProvider dp = DataProvider.getInstance();
+        mListItems = dp.readListsFromFile(getActivity().getApplicationContext());
 
         ListItemAdapter myAdapter = new ListItemAdapter(getActivity(), R.layout.list_item, mListItems);
         setListAdapter(myAdapter);

@@ -6,12 +6,14 @@ import android.widget.Toast;
 //import org.json.JSONObject;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 
@@ -30,11 +32,12 @@ public class DataProvider {
     }
 
     private Gson gson = new Gson();
+    private String FILENAME = "todolist.js";
+
 
     //Will read and write the entire JSON list of lists each time
     public boolean saveListToFile(ArrayList<ListItem> items, Context context) {
         //save to disk
-        String FILENAME = "todolist.js";
 
         String gsonData = gson.toJson(items);
 
@@ -52,26 +55,30 @@ public class DataProvider {
         return false;
     }
 
-    public ArrayList<List> readListsFromFile() {
-        ArrayList<List> lists = new ArrayList<List>();
+    public ArrayList<ListItem> readListsFromFile(Context context) {
+        ArrayList<ListItem> items = new ArrayList<ListItem>();
 
-//        try {
-//            BufferedReader inputReader = new BufferedReader(new InputStreamReader(
-//                    openFileInput(FILENAME)));
+        Type collectionType = new TypeToken<ArrayList<ListItem>>() {}.getType();
+
+        try {
+            BufferedReader inputReader = new BufferedReader(new InputStreamReader(
+                    context.openFileInput(FILENAME)));
 //            String inputString;
 //            StringBuffer stringBuffer = new StringBuffer();
 //            while ((inputString = inputReader.readLine()) != null) {
 //                stringBuffer.append(inputString + "\n");
 //            }
-//            Toast.makeText(getApplicationContext(),
+//            Toast.makeText(context,
 //                    stringBuffer.toString(),
 //                    Toast.LENGTH_LONG).show();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//
-//        }
+            items = gson.fromJson(inputReader, collectionType);
 
-        return lists;
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+
+        return items;
     }
 
 
