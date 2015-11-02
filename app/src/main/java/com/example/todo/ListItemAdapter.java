@@ -26,7 +26,7 @@ public class ListItemAdapter extends ArrayAdapter<ListItem> {
         super(context, textViewResourceId, listItems);
         mContext = context;
         mListItems = new ArrayList<ListItem>();
-        getListItems().addAll(listItems);
+        mListItems.addAll(listItems);
     }
 
 
@@ -58,7 +58,8 @@ public class ListItemAdapter extends ArrayAdapter<ListItem> {
                             "Clicked on Checkbox: " + cb.getText() +
                                     " is " + cb.isChecked(),
                             Toast.LENGTH_LONG).show();
-                    //listItem.setSelected(cb.isChecked());
+                    listItem.setIsDone(cb.isChecked());
+
                 }
             });
         } else {
@@ -68,6 +69,8 @@ public class ListItemAdapter extends ArrayAdapter<ListItem> {
         ListItem listItem = getListItems().get(position);
         holder.item.setText(listItem.getItemText());
         holder.checked.setChecked(listItem.getIsDone());
+        //holder.checked.setText(listItem.getItemText());
+        holder.checked.setTag(listItem);
 
         return convertView;
     }

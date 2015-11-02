@@ -56,7 +56,7 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.save_list) {
             DataProvider dp = DataProvider.getInstance();
             ListItemFragment fragment = (ListItemFragment)getSupportFragmentManager().findFragmentById(R.id.container);
-            dp.saveListToFile(fragment.mListItems, getApplicationContext());
+            dp.saveListToFile(fragment.getListItemAdapter().getListItems(), getApplicationContext());
             //dp.readListsFromFile(getApplicationContext());
 
             return true;

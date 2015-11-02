@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ListItemFragment extends ListFragment {
 
     ArrayList<ListItem> mListItems;
-
+    private ListItemAdapter mListItemAdapter;
 
     public ListItemFragment() {
     }
@@ -22,8 +22,8 @@ public class ListItemFragment extends ListFragment {
         DataProvider dp = DataProvider.getInstance();
         mListItems = dp.readListsFromFile(getActivity().getApplicationContext());
 
-        ListItemAdapter myAdapter = new ListItemAdapter(getActivity(), R.layout.list_item, mListItems);
-        setListAdapter(myAdapter);
+        mListItemAdapter = new ListItemAdapter(getActivity(), R.layout.list_item, mListItems);
+        setListAdapter(getListItemAdapter());
     }
 
     @Override
@@ -34,4 +34,7 @@ public class ListItemFragment extends ListFragment {
         return rootView;
     }
 
+    public ListItemAdapter getListItemAdapter() {
+        return mListItemAdapter;
+    }
 }
